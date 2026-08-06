@@ -1,0 +1,16 @@
+$ORIGIN dnyftech.com.
+$TTL 3600
+
+@    IN    A        185.199.108.153
+@    IN    A        185.199.109.153
+@    IN    A        185.199.110.153
+@    IN    A        185.199.111.153
+
+www  IN    CNAME    dnyftech.github.io.
+
+@    IN    MX       10 mail.dnyftech.com.
+
+@    IN    TXT      "v=spf1 -all"
+
+@    IN    CAA      0 issue "letsencrypt.org"
+@    IN    CAA      0 issuewild "letsencrypt.org"
