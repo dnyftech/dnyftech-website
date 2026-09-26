@@ -1,4 +1,4 @@
-$ORIGIN dnyftech.com.
+$ORIGIN https://dnyftech.github.io/dnyftech-website.
 $TTL 3600
 
 @    IN    A        185.199.108.153

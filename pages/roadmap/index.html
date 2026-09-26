@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roadmap | DNYF Platform</title>
+    
+    <meta name="description" content="DNYF Roadmap - Future plans and upcoming features">
+    
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/icons/icon-192x192.png" type="image/png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="/css/platform.css">
+    <style>
+        .page-header {
+            padding: 120px 0 60px;
+            margin-top: 80px;
+            background: linear-gradient(135deg, rgba(61, 220, 132, 0.1) 0%, rgba(0, 217, 255, 0.05) 100%);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .page-title {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 600px;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 60px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), transparent);
+        }
+
+        .timeline-item {
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: 0;
+            margin-right: auto;
+            width: 45%;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: auto;
+            margin-right: 0;
+            width: 45%;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border: 4px solid var(--dark);
+            border-radius: 50%;
+            z-index: 10;
+        }
+
+        .timeline-content {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .timeline-content:hover {
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .timeline-period {
+            color: var(--primary);
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .timeline-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--light);
+        }
+
+        .timeline-features {
+            list-style: none;
+            padding: 0;
+        }
+
+        .timeline-features li {
+            padding: 8px 0;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .timeline-features li::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 15px;
+        }
+
+        .status-completed {
+            background: rgba(39, 201, 63, 0.1);
+            color: #27c93f;
+        }
+
+        .status-in-progress {
+            background: rgba(255, 189, 46, 0.1);
+            color: #ffbd2e;
+        }
+
+        .status-planned {
+            background: rgba(0, 217, 255, 0.1);
+            color: #00d9ff;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 60px 0;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 10px;
+            color: var(--light);
+        }
+
+        .feature-card p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .priority-section {
+            margin: 80px 0;
+            padding: 60px 40px;
+            background: var(--darker);
+            border-radius: 10px;
+        }
+
+        @media (max-width: 1024px) {
+            .timeline::before {
+                display: none;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-content,
+            .timeline-item:nth-child(even) .timeline-content {
+                width: 100%;
+                margin: 0;
+            }
+
+            .timeline-marker {
+                left: -10px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-header {
+                padding: 100px 0 40px;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .timeline-marker {
+                left: -15px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .priority-section {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="main-nav">
+                <a href="/" class="logo">
+                    <i class="fas fa-terminal"></i>
+                    <span class="brand">DNYF</span>
+                    <span class="platform-badge">Platform</span>
+                </a>
+                
+                <button class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
+                <div class="menu" id="mainMenu">
+                    <a href="/" class="menu-link">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <div class="menu-item">
+                        <button class="menu-link menu-toggle" id="pagesToggle">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Pages</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="submenu" id="pagesMenu">
+                            <a href="/pages/projects" class="submenu-link">
+                                <i class="fas fa-code-branch"></i> Projects
+                            </a>
+                            <a href="/pages/about" class="submenu-link">
+                                <i class="fas fa-user"></i> About
+                            </a>
+                            <a href="/pages/team" class="submenu-link">
+                                <i class="fas fa-users"></i> Team
+                            </a>
+                            <a href="/pages/roadmap" class="submenu-link">
+                                <i class="fas fa-map"></i> Roadmap
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-actions">
+                        <button id="themeToggle" class="menu-btn theme-btn">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                        <a href="https://github.com/dnyftetch" target="_blank" class="menu-btn github-btn">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">Roadmap</h1>
+            <p class="page-subtitle">Our vision for the future and upcoming features</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main id="pageContent">
+        <section class="page-section">
+            <div class="container">
+                <!-- Overview -->
+                <div style="text-align: center; margin-bottom: 80px;">
+                    <h2 class="section-title">2024-2025 Development Plan</h2>
+                    <p style="color: var(--gray); font-size: 1.1rem; max-width: 700px; margin: 0 auto;">
+                        We're committed to continuously improving and expanding the DNYF Platform. 
+                        This roadmap outlines our goals and planned features for the coming year.
+                    </p>
+                </div>
+
+                <!-- Timeline -->
+                <div class="timeline">
+                    <!-- Q1 2024 -->
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-period">Q1 2024</div>
+                            <div class="timeline-title">Foundation & Core Platform</div>
+                            <ul class="timeline-features">
+                                <li>Platform launch with menu system</li>
+                                <li>GitHub integration</li>
+                                <li>Basic documentation structure</li>
+                                <li>PWA functionality</li>
+                            </ul>
+                            <span class="status-badge status-completed">
+                                <i class="fas fa-check"></i> Completed
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Q2 2024 -->
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-period">Q2 2024</div>
+                            <div class="timeline-title">Content & Tools Expansion</div>
+                            <ul class="timeline-features">
+                                <li>Complete all page templates</li>
+                                <li>AI Chat implementation</li>
+                                <li>Code converter tool</li>
+                                <li>Learning content creation</li>
+                            </ul>
+                            <span class="status-badge status-in-progress">
+                                <i class="fas fa-spinner"></i> In Progress
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Q3 2024 -->
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-period">Q3 2024</div>
+                            <div class="timeline-title">Interactive Features</div>
+                            <ul class="timeline-features">
+                                <li>API Tester tool</li>
+                                <li>JSON Formatter & validator</li>
+                                <li>Advanced learning modules</li>
+                                <li>Community discussions</li>
+                            </ul>
+                            <span class="status-badge status-planned">
+                                <i class="fas fa-calendar"></i> Planned
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Q4 2024 -->
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-period">Q4 2024</div>
+                            <div class="timeline-title">Enhancement & Optimization</div>
+                            <ul class="timeline-features">
+                                <li>Performance optimizations</li>
+                                <li>SEO improvements</li>
+                                <li>Advanced analytics</li>
+                                <li>User feedback integration</li>
+                            </ul>
+                            <span class="status-badge status-planned">
+                                <i class="fas fa-calendar"></i> Planned
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- 2025 -->
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-period">2025</div>
+                            <div class="timeline-title">Version 2.0 & Expansion</div>
+                            <ul class="timeline-features">
+                                <li>Admin dashboard</li>
+                                <li>User accounts & profiles</li>
+                                <li>Advanced collaboration tools</li>
+                                <li>Mobile app launch</li>
+                            </ul>
+                            <span class="status-badge status-planned">
+                                <i class="fas fa-calendar"></i> Planned
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upcoming Features Section -->
+                <section class="priority-section">
+                    <h2 class="section-title" style="margin-bottom: 40px;">High Priority Features</h2>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <h3>Advanced AI Chat</h3>
+                            <p>Enhanced AI assistant with multi-language support, voice I/O, and custom training.</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3>Community Forum</h3>
+                            <p>Interactive discussions, Q&A section, and community-driven content moderation.</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <h3>Interactive Tutorials</h3>
+                            <p>Step-by-step coding tutorials with live code execution and instant feedback.</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h3>Analytics Dashboard</h3>
+                            <p>Comprehensive stats on your projects, learning progress, and contributions.</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <h3>Mobile App</h3>
+                            <p>Native iOS and Android apps with full feature parity with web platform.</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <h3>Code Playground</h3>
+                            <p>Execute code in multiple languages with real-time output and collaboration.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Community Feedback Section -->
+                <section style="text-align: center; margin: 80px 0;">
+                    <h2 class="section-title">We Value Your Input</h2>
+                    <p style="color: var(--gray); font-size: 1.1rem; margin-bottom: 30px; max-width: 700px; margin-left: auto; margin-right: auto;">
+                        Your feedback shapes our roadmap. Tell us what features you'd like to see, 
+                        and help us prioritize development.
+                    </p>
+                    <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                        <a href="https://github.com/dnyftetch/issues" target="_blank" class="btn btn-primary">
+                            <i class="fas fa-github"></i> Request Feature
+                        </a>
+                        <a href="mailto:feedback@dnyf.com" class="btn btn-secondary">
+                            <i class="fas fa-envelope"></i> Send Feedback
+                        </a>
+                    </div>
+                </section>
+
+                <!-- Legend -->
+                <section style="background: var(--darker); padding: 40px; border-radius: 10px; margin: 60px 0;">
+                    <h3 style="margin-bottom: 20px;">Status Legend</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                        <div>
+                            <span class="status-badge status-completed">
+                                <i class="fas fa-check"></i> Completed
+                            </span>
+                            <p style="color: var(--gray); margin-top: 10px; font-size: 0.9rem;">Released and available for use</p>
+                        </div>
+                        <div>
+                            <span class="status-badge status-in-progress">
+                                <i class="fas fa-spinner"></i> In Progress
+                            </span>
+                            <p style="color: var(--gray); margin-top: 10px; font-size: 0.9rem;">Currently being developed</p>
+                        </div>
+                        <div>
+                            <span class="status-badge status-planned">
+                                <i class="fas fa-calendar"></i> Planned
+                            </span>
+                            <p style="color: var(--gray); margin-top: 10px; font-size: 0.9rem;">Scheduled for future release</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <i class="fas fa-terminal"></i> DNYF <span>Platform</span>
+                    </div>
+                    <p>Innovating for the future of development and learning.</p>
+                    <div class="footer-social">
+                        <a href="https://github.com/dnyftetch" target="_blank">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://twitter.com/dnyftetch" target="_blank">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="mailto:contact@dnyf.com">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Planning</h3>
+                    <a href="/pages/roadmap">Roadmap</a>
+                    <a href="https://github.com/dnyftetch">GitHub</a>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Projects</h3>
+                    <a href="/pages/projects">All Projects</a>
+                    <a href="/pages/about">About</a>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Feedback</h3>
+                    <a href="https://github.com/dnyftetch/issues">Issues</a>
+                    <a href="mailto:feedback@dnyf.com">Email</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear">2024</span> DNYF Platform. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/js/menu.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+        });
+    </script>
+</body>
+</html>

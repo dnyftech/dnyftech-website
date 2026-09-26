@@ -1,51 +1,650 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta property="og:title" content="DNYFTECH">
-<meta property="og:description" content="AI • Cloud • Software Engineering">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://dnyftech.com">
-<meta property="og:image" content="assets/images/cover.png">
-<meta name="theme-color" content="#0d1117">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>DNYF Platform | AI Research, Development & Learning</title>
 
-<title>DNYFTECH | AI • Cloud • Software Engineering</title>
+	<!-- SEO & Meta Tags -->
+	<meta name="description" content="DNYF Platform - AI Research, Development Tools, Documentation, Learning Guides, and Resources">
+	<meta name="keywords" content="DNYF, AI Research, Development Platform, Learning, Tools, Documentation">
+	<meta name="author" content="DNYF">
+	<meta name="theme-color" content="#3DDC84">
 
-<meta name="description" content="DNYFTECH is an AI engineering company building intelligent software, cloud platforms, automation systems and digital infrastructure.">
-<meta name="keywords" content="DNYFTECH, AI, Artificial Intelligence, Cloud, Software, Automation">
-<meta name="author" content="DNYFTECH">
+	<!-- PWA -->
+	<link rel="manifest" href="/manifest.json">
+	<link rel="icon" href="/icons/icon-192x192.png" type="image/png">
 
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/responsive.css">
-<link rel="icon" href="assets/icons/favicon.png">
+	<!-- Fonts -->
+	<link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<script defer src="js/theme.js"></script>
-<script defer src="js/router.js"></script>
-<script defer src="js/app.js"></script>
-<script defer src="js/api.js"></script>
+	<!-- CSS -->
+	<link rel="stylesheet" href="css/platform.css">
 
+	<!-- Loading Animation Styles -->
+	<style>
+		/* Loading Screen */
+		.loading-screen {
+		    position: fixed;
+		    top: 0;
+		    left: 0;
+		    width: 100%;
+		    height: 100%;
+		    background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
+		    display: flex;
+		    flex-direction: column;
+		    align-items: center;
+		    justify-content: center;
+		    z-index: 9999;
+		    opacity: 1;
+		    transition: opacity 0.6s ease-out;
+		}
+		
+		.loading-screen.hidden {
+		    opacity: 0;
+		    pointer-events: none;
+		}
+		
+		.loading-container {
+		    text-align: center;
+		    color: white;
+		}
+		
+		/* Animated Logo */
+		.loading-logo {
+		    font-size: 4rem;
+		    margin-bottom: 20px;
+		    animation: pulse-logo 2s ease-in-out infinite;
+		}
+		
+		@keyframes pulse-logo {
+		    0%, 100% {
+		        opacity: 1;
+		        transform: scale(1);
+		    }
+		    50% {
+		        opacity: 0.6;
+		        transform: scale(1.1);
+		    }
+		}
+		
+		/* Spinner */
+		.spinner {
+		    width: 50px;
+		    height: 50px;
+		    border: 4px solid rgba(61, 220, 132, 0.2);
+		    border-top: 4px solid #3DDC84;
+		    border-radius: 50%;
+		    animation: spin 1s linear infinite;
+		    margin: 20px auto;
+		}
+		
+		@keyframes spin {
+		    to {
+		        transform: rotate(360deg);
+		    }
+		}
+		
+		/* Loading Text */
+		.loading-text {
+		    font-size: 1.2rem;
+		    color: #3DDC84;
+		    margin-top: 20px;
+		    font-weight: 600;
+		    letter-spacing: 1px;
+		    animation: blink-text 1.5s ease-in-out infinite;
+		}
+		
+		@keyframes blink-text {
+		    0%, 100% {
+		        opacity: 1;
+		    }
+		    50% {
+		        opacity: 0.5;
+		    }
+		}
+		
+		/* Loading Bar */
+		.loading-bar {
+		    width: 200px;
+		    height: 4px;
+		    background: rgba(61, 220, 132, 0.2);
+		    border-radius: 2px;
+		    margin-top: 30px;
+		    overflow: hidden;
+		}
+		
+		.loading-bar-progress {
+		    height: 100%;
+		    background: linear-gradient(90deg, #3DDC84, #00d9ff, #3DDC84);
+		    border-radius: 2px;
+		    width: 0%;
+		    animation: progress-bar 2s ease-in-out forwards;
+		}
+		
+		@keyframes progress-bar {
+		    0% {
+		        width: 0%;
+		    }
+		    90% {
+		        width: 90%;
+		    }
+		    100% {
+		        width: 100%;
+		    }
+		}
+		
+		/* Dots animation */
+		.dots {
+		    display: inline-block;
+		    margin-left: 5px;
+		}
+		
+		.dot {
+		    display: inline-block;
+		    width: 8px;
+		    height: 8px;
+		    background: #3DDC84;
+		    border-radius: 50%;
+		    margin: 0 3px;
+		    animation: bounce 1.4s infinite;
+		}
+		
+		.dot:nth-child(2) {
+		    animation-delay: 0.2s;
+		}
+		
+		.dot:nth-child(3) {
+		    animation-delay: 0.4s;
+		}
+		
+		@keyframes bounce {
+		    0%, 80%, 100% {
+		        opacity: 0.3;
+		        transform: translateY(0);
+		    }
+		    40% {
+		        opacity: 1;
+		        transform: translateY(-10px);
+		    }
+		}
+	</style>
+
+	<script>
+		// Initialize theme
+		const savedTheme = localStorage.getItem('theme') || 'dark';
+		document.documentElement.setAttribute('data-theme', savedTheme);
+		
+		// Service Worker
+		if ('serviceWorker' in navigator) {
+		    window.addEventListener('load', () => {
+		        navigator.serviceWorker.register('/sw.js');
+		    });
+		}
+	</script>
 </head>
 
 <body>
+	<!-- Loading Screen -->
+	<div class="loading-screen" id="loadingScreen">
+		<div class="loading-container">
+			<div class="loading-logo">
+				<i class="fas fa-terminal"></i>
+			</div>
+			<div class="spinner"></div>
+			<div class="loading-text">
+				DNYF Platform
+				<span class="dots">
+					<span class="dot"></span>
+					<span class="dot"></span>
+					<span class="dot"></span>
+				</span>
+			</div>
+			<div class="loading-bar">
+				<div class="loading-bar-progress"></div>
+			</div>
+		</div>
+	</div>
 
-<header id="header"></header>
+	<!-- Offline Indicator -->
+	<div class="offline-indicator" id="offlineIndicator">
+		<i class="fas fa-wifi-slash"></i> Offline mode active
+	</div>
 
-<main id="app">
+	<!-- Mobile Overlay (closes menu when clicked outside) -->
+	<div class="mobile-overlay" id="mobileOverlay"></div>
 
-<section id="hero"></section>
+	<!-- Header with Dynamic Menu -->
+	<header>
+		<div class="container">
+			<nav class="main-nav">
+				<!-- Logo -->
+				<a href="/" class="logo">
+					<i class="fas fa-terminal"></i>
+					<span class="brand">DNYF</span>
+					<span class="platform-badge">Platform</span>
+				</a>
 
-<section id="services"></section>
+				<!-- Hamburger Menu Button -->
+				<button class="hamburger" id="hamburger">
+					<span></span>
+					<span></span>
+					<span></span>
+				</button>
 
-<section id="products"></section>
+				<!-- Main Menu -->
+				<div class="menu" id="mainMenu">
+					<!-- Home Link -->
+					<a href="/" class="menu-link active">
+						<i class="fas fa-home"></i>
+						<span>Home</span>
+					</a>
 
-<section id="about"></section>
+					<!-- Expandable Pages Menu -->
+					<div class="menu-item">
+						<button class="menu-link menu-toggle" id="pagesToggle">
+							<i class="fas fa-file-alt"></i>
+							<span>Pages</span>
+							<i class="fas fa-chevron-down"></i>
+						</button>
+						<div class="submenu" id="pagesMenu">
+							<a href="/pages/projects/index.html" class="submenu-link">
+								<i class="fas fa-code-branch"></i> Projects
+							</a>
+							<a href="/pages/about/index.html" class="submenu-link">
+								<i class="fas fa-user"></i> About
+							</a>
+							<a href="/pages/team/index.html" class="submenu-link">
+								<i class="fas fa-users"></i> Team
+							</a>
+							<a href="/pages/roadmap/index.html" class="submenu-link">
+								<i class="fas fa-map"></i> Roadmap
+							</a>
+						</div>
+					</div>
 
-<section id="contact"></section>
+					<!-- Expandable Tools Menu -->
+					<div class="menu-item">
+						<button class="menu-link menu-toggle" id="toolsToggle">
+							<i class="fas fa-tools"></i>
+							<span>Tools</span>
+							<i class="fas fa-chevron-down"></i>
+						</button>
+						<div class="submenu" id="toolsMenu">
+							<a href="/tools/ai-chat" class="submenu-link">
+								<i class="fas fa-robot"></i> AI Chat
+							</a>
+							<a href="/tools/code-converter" class="submenu-link">
+								<i class="fas fa-arrows-alt-h"></i> Code Converter
+							</a>
+							<a href="/tools/api-tester" class="submenu-link">
+								<i class="fas fa-flask"></i> API Tester
+							</a>
+							<a href="/tools/json-formatter" class="submenu-link">
+								<i class="fas fa-code"></i> JSON Formatter
+							</a>
+							<a href="/tools/color-picker" class="submenu-link">
+								<i class="fas fa-palette"></i> Color Picker
+							</a>
+							<a href="/tools/generator" class="submenu-link">
+								<i class="fas fa-wand-magic-sparkles"></i> Generator
+							</a>
+						</div>
+					</div>
 
-</main>
+					<!-- Expandable Docs Menu -->
+					<div class="menu-item">
+						<button class="menu-link menu-toggle" id="docsToggle">
+							<i class="fas fa-book"></i>
+							<span>Docs</span>
+							<i class="fas fa-chevron-down"></i>
+						</button>
+						<div class="submenu" id="docsMenu">
+							<a href="/docs/getting-started" class="submenu-link">
+								<i class="fas fa-rocket"></i> Getting Started
+							</a>
+							<a href="/docs/api-reference" class="submenu-link">
+								<i class="fas fa-cube"></i> API Reference
+							</a>
+							<a href="/docs/installation" class="submenu-link">
+								<i class="fas fa-download"></i> Installation
+							</a>
+							<a href="/docs/faq" class="submenu-link">
+								<i class="fas fa-question-circle"></i> FAQ
+							</a>
+							<a href="/docs/troubleshooting" class="submenu-link">
+								<i class="fas fa-bug"></i> Troubleshooting
+							</a>
+						</div>
+					</div>
 
-<footer id="footer"></footer>
+					<!-- Expandable Learning Menu -->
+					<div class="menu-item">
+						<button class="menu-link menu-toggle" id="learningToggle">
+							<i class="fas fa-graduation-cap"></i>
+							<span>Learning</span>
+							<i class="fas fa-chevron-down"></i>
+						</button>
+						<div class="submenu" id="learningMenu">
+							<a href="/learning/complex-coding" class="submenu-link">
+								<i class="fas fa-brain"></i> Complex Coding Guide
+							</a>
+							<a href="/learning/ai-fundamentals" class="submenu-link">
+								<i class="fas fa-sparkles"></i> AI Fundamentals
+							</a>
+							<a href="/learning/web-development" class="submenu-link">
+								<i class="fas fa-globe"></i> Web Development
+							</a>
+							<a href="/learning/mobile-dev" class="submenu-link">
+								<i class="fab fa-android"></i> Mobile Development
+							</a>
+							<a href="/learning/termux-guide" class="submenu-link">
+								<i class="fas fa-terminal"></i> Termux Guide
+							</a>
+							<a href="/learning/resources" class="submenu-link">
+								<i class="fas fa-link"></i> Resources
+							</a>
+						</div>
+					</div>
+
+					<!-- Expandable Community Menu -->
+					<div class="menu-item">
+						<button class="menu-link menu-toggle" id="communityToggle">
+							<i class="fas fa-comments"></i>
+							<span>Community</span>
+							<i class="fas fa-chevron-down"></i>
+						</button>
+						<div class="submenu" id="communityMenu">
+							<a href="/community/discussions" class="submenu-link">
+								<i class="fas fa-comments"></i> Discussions
+							</a>
+							<a href="/community/contribute" class="submenu-link">
+								<i class="fas fa-heart"></i> Contribute
+							</a>
+							<a href="/community/showcase" class="submenu-link">
+								<i class="fas fa-star"></i> Showcase
+							</a>
+							<a href="/community/events" class="submenu-link">
+								<i class="fas fa-calendar"></i> Events
+							</a>
+						</div>
+					</div>
+
+					<!-- Account & Theme -->
+					<div class="menu-actions">
+						<button id="themeToggle" class="menu-btn theme-btn" title="Toggle theme">
+							<i class="fas fa-moon"></i>
+						</button>
+						<a href="https://github.com/dnyf-platform" target="_blank" class="menu-btn github-btn">
+							<i class="fab fa-github"></i>
+						</a>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</header>
+
+	<!-- Page Container (dynamic content loads here) -->
+	<main id="pageContent">
+		<!-- Hero Section (shows on home) -->
+		<section class="hero" id="heroSection">
+			<div class="container">
+				<div class="hero-content">
+					<div class="hero-badge">
+						<i class="fas fa-terminal"></i> Advanced Development Platform
+					</div>
+					<h1>Welcome to <span class="highlight">DNYF Platform</span></h1>
+					<p>AI Research, Development Tools, Documentation, and Learning Resources all in one place.</p>
+
+					<div class="hero-cards">
+						<div class="hero-card">
+							<div class="card-icon">
+								<i class="fas fa-code-branch"></i>
+							</div>
+							<h3>Projects</h3>
+							<p>GitHub-synced projects and contributions</p>
+						</div>
+						<div class="hero-card">
+							<div class="card-icon">
+								<i class="fas fa-tools"></i>
+							</div>
+							<h3>Tools</h3>
+							<p>Powerful development utilities</p>
+						</div>
+						<div class="hero-card">
+							<div class="card-icon">
+								<i class="fas fa-book"></i>
+							</div>
+							<h3>Documentation</h3>
+							<p>Comprehensive guides and references</p>
+						</div>
+						<div class="hero-card">
+							<div class="card-icon">
+								<i class="fas fa-graduation-cap"></i>
+							</div>
+							<h3>Learning</h3>
+							<p>Complex coding and AI fundamentals</p>
+						</div>
+					</div>
+
+					<div class="hero-buttons">
+						<a href="/pages/projects/index.html" class="btn btn-primary">
+							<i class="fas fa-rocket"></i> Explore Projects
+						</a>
+						<a href="/learning/complex-coding" class="btn btn-secondary">
+							<i class="fas fa-brain"></i> Learn Advanced Coding
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Stats Section -->
+		<section class="stats-section">
+			<div class="container">
+				<div class="stats-grid">
+					<div class="stat-item">
+						<div class="stat-icon">
+							<i class="fas fa-code-branch"></i>
+						</div>
+						<div class="stat-value" id="totalRepos">0</div>
+						<div class="stat-label">Repositories</div>
+					</div>
+					<div class="stat-item">
+						<div class="stat-icon">
+							<i class="fas fa-star"></i>
+						</div>
+						<div class="stat-value" id="totalStars">0</div>
+						<div class="stat-label">Stars</div>
+					</div>
+					<div class="stat-item">
+						<div class="stat-icon">
+							<i class="fas fa-users"></i>
+						</div>
+						<div class="stat-value" id="totalFollowers">0</div>
+						<div class="stat-label">Followers</div>
+					</div>
+					<div class="stat-item">
+						<div class="stat-icon">
+							<i class="fas fa-fire"></i>
+						</div>
+						<div class="stat-value" id="currentStreak">0</div>
+						<div class="stat-label">Day Streak</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Featured Tools Section -->
+		<section class="featured-tools" id="featuredTools">
+			<div class="container">
+				<h2>Featured Tools</h2>
+				<p class="section-subtitle">Quick access to popular utilities</p>
+
+				<div class="tools-grid">
+					<a href="/tools/ai-chat" class="tool-card">
+						<div class="tool-icon">
+							<i class="fas fa-robot"></i>
+						</div>
+						<h3>AI Chat</h3>
+						<p>Interactive AI assistant</p>
+					</a>
+					<a href="/tools/code-converter" class="tool-card">
+						<div class="tool-icon">
+							<i class="fas fa-arrows-alt-h"></i>
+						</div>
+						<h3>Code Converter</h3>
+						<p>Convert between languages</p>
+					</a>
+					<a href="/tools/json-formatter" class="tool-card">
+						<div class="tool-icon">
+							<i class="fas fa-code"></i>
+						</div>
+						<h3>JSON Formatter</h3>
+						<p>Format & validate JSON</p>
+					</a>
+					<a href="/tools/api-tester" class="tool-card">
+						<div class="tool-icon">
+							<i class="fas fa-flask"></i>
+						</div>
+						<h3>API Tester</h3>
+						<p>Test REST APIs</p>
+					</a>
+				</div>
+			</div>
+		</section>
+
+		<!-- Featured Learning Section -->
+		<section class="featured-learning" id="featuredLearning">
+			<div class="container">
+				<h2>Featured Learning</h2>
+				<p class="section-subtitle">Master advanced techniques</p>
+
+				<div class="learning-grid">
+					<a href="/learning/complex-coding" class="learning-card">
+						<div class="learning-header" style="background: linear-gradient(135deg, #3DDC84, #00d9ff);">
+							<i class="fas fa-brain"></i>
+						</div>
+						<h3>Complex Coding</h3>
+						<p>Advanced patterns and techniques for sophisticated application development</p>
+						<span class="difficulty">Advanced</span>
+					</a>
+					<a href="/learning/ai-fundamentals" class="learning-card">
+						<div class="learning-header" style="background: linear-gradient(135deg, #b967ff, #ff5f56);">
+							<i class="fas fa-sparkles"></i>
+						</div>
+						<h3>AI Fundamentals</h3>
+						<p>Introduction to machine learning, neural networks, and AI concepts</p>
+						<span class="difficulty">Intermediate</span>
+					</a>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<!-- Footer -->
+	<footer>
+		<div class="container">
+			<div class="footer-content">
+				<div class="footer-brand">
+					<div class="logo">
+						<i class="fas fa-terminal"></i> DNYF <span>Platform</span>
+					</div>
+					<p>Advanced development platform with AI research, tools, documentation, and learning resources.</p>
+					<div class="footer-social">
+						<a href="https://github.com/dnyf-platform" target="_blank" title="GitHub">
+							<i class="fab fa-github"></i>
+						</a>
+						<a href="https://twitter.com/dnyf-platform" target="_blank" title="Twitter">
+							<i class="fab fa-twitter"></i>
+						</a>
+						<a href="mailto:contact@dnyf.com" title="Email">
+							<i class="fas fa-envelope"></i>
+						</a>
+					</div>
+				</div>
+
+				<div class="footer-links">
+					<h3>Platform</h3>
+					<a href="/">Home</a>
+					<a href="/pages/projects/index.html">Projects</a>
+					<a href="/tools/ai-chat">Tools</a>
+					<a href="/docs/getting-started">Docs</a>
+				</div>
+
+				<div class="footer-links">
+					<h3>Learning</h3>
+					<a href="/learning/complex-coding">Complex Coding</a>
+					<a href="/learning/ai-fundamentals">AI Fundamentals</a>
+					<a href="/learning/resources">Resources</a>
+				</div>
+
+				<div class="footer-links">
+					<h3>Community</h3>
+					<a href="/community/discussions">Discussions</a>
+					<a href="/community/contribute">Contribute</a>
+					<a href="/community/showcase">Showcase</a>
+				</div>
+			</div>
+
+			<div class="footer-bottom">
+				<p>&copy; <span id="currentYear">2024</span> DNYF Platform. All rights reserved.</p>
+				<div class="footer-meta">
+					<span><i class="fas fa-code"></i> Open Source</span>
+					<span><i class="fas fa-mobile-alt"></i> PWA Ready</span>
+					<span id="networkStatus">
+						<i class="fas fa-wifi"></i> <span id="statusText">Online</span>
+					</span>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<!-- Scripts -->
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/pwa.js"></script>
+	<script src="js/loading-animations.js"></script>
+	<script src="js/contributions.js"></script>
+	<script src="js/platform.js"></script>
+	<script src="js/github.js"></script>
+	<script src="js/menu.js"></script>
+
+	<!-- Loading Screen Handler -->
+	<script>
+		// Hide loading screen when page is fully loaded
+		window.addEventListener('load', () => {
+		    const loadingScreen = document.getElementById('loadingScreen');
+		    if (loadingScreen) {
+		        setTimeout(() => {
+		            loadingScreen.classList.add('hidden');
+		        }, 800); // Wait for animation to complete
+		    }
+		});
+		
+		// Also hide after a timeout (in case load event doesn't fire)
+		window.addEventListener('DOMContentLoaded', () => {
+		    setTimeout(() => {
+		        const loadingScreen = document.getElementById('loadingScreen');
+		        if (loadingScreen) {
+		            loadingScreen.classList.add('hidden');
+		        }
+		    }, 2000);
+		});
+	</script>
+
+	<!-- Scripts -->
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/pwa.js"></script>
+	<script src="js/loading-animations.js"></script>
+	<script src="and 		js/contributions.js"></script>
+	<script src="js/platform.js"></script>
+	<script src="js/github.js"></script>
+	<script src="js/menu.js"></script>
 
 </body>
+
 </html>

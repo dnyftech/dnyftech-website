@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team | DNYF Platform</title>
+    
+    <meta name="description" content="DNYF Team - Meet the people behind the platform">
+    
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/icons/icon-192x192.png" type="image/png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="/css/platform.css">
+    <style>
+        .page-header {
+            padding: 120px 0 60px;
+            margin-top: 80px;
+            background: linear-gradient(135deg, rgba(61, 220, 132, 0.1) 0%, rgba(0, 217, 255, 0.05) 100%);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .page-title {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 600px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .team-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .team-avatar {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(61, 220, 132, 0.2), rgba(0, 217, 255, 0.2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--primary);
+        }
+
+        .team-content {
+            padding: 25px;
+        }
+
+        .team-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: var(--light);
+        }
+
+        .team-role {
+            color: var(--primary);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .team-bio {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            min-height: 60px;
+        }
+
+        .team-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .skill-tag {
+            background: rgba(61, 220, 132, 0.1);
+            color: var(--primary);
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+
+        .team-socials {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .social-link {
+            width: 35px;
+            height: 35px;
+            background: rgba(61, 220, 132, 0.1);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            color: #000;
+            transform: translateY(-3px);
+        }
+
+        .section-divider {
+            margin: 80px 0;
+            text-align: center;
+        }
+
+        .section-divider h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .section-divider p {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+        .roles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .role-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .role-card:hover {
+            border-color: var(--primary);
+            background: rgba(61, 220, 132, 0.05);
+        }
+
+        .role-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .role-card h3 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            color: var(--light);
+        }
+
+        .role-card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        .cta-section {
+            background: rgba(61, 220, 132, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 60px 40px;
+            text-align: center;
+            margin: 80px 0;
+        }
+
+        .cta-section h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .cta-section p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media (max-width: 768px) {
+            .page-header {
+                padding: 100px 0 40px;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-divider h2 {
+                font-size: 2rem;
+            }
+
+            .cta-section {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="main-nav">
+                <a href="/" class="logo">
+                    <i class="fas fa-terminal"></i>
+                    <span class="brand">DNYF</span>
+                    <span class="platform-badge">Platform</span>
+                </a>
+                
+                <button class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
+                <div class="menu" id="mainMenu">
+                    <a href="/" class="menu-link">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <div class="menu-item">
+                        <button class="menu-link menu-toggle" id="pagesToggle">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Pages</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="submenu" id="pagesMenu">
+                            <a href="/pages/projects" class="submenu-link">
+                                <i class="fas fa-code-branch"></i> Projects
+                            </a>
+                            <a href="/pages/about" class="submenu-link">
+                                <i class="fas fa-user"></i> About
+                            </a>
+                            <a href="/pages/team" class="submenu-link">
+                                <i class="fas fa-users"></i> Team
+                            </a>
+                            <a href="/pages/roadmap" class="submenu-link">
+                                <i class="fas fa-map"></i> Roadmap
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-actions">
+                        <button id="themeToggle" class="menu-btn theme-btn">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                        <a href="https://github.com/dnyftetch" target="_blank" class="menu-btn github-btn">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">Meet Our Team</h1>
+            <p class="page-subtitle">The talented people behind DNYF Platform</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main id="pageContent">
+        <section class="page-section">
+            <div class="container">
+                <!-- Core Team -->
+                <div class="section-divider">
+                    <h2>Core Team</h2>
+                    <p>The dedicated developers and researchers driving DNYF forward</p>
+                </div>
+
+                <div class="team-grid">
+                    <!-- Team Member 1 -->
+                    <div class="team-card">
+                        <div class="team-avatar">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <div class="team-content">
+                            <div class="team-name">Lead Developer</div>
+                            <div class="team-role">Full Stack Engineer</div>
+                            <div class="team-bio">Passionate about building innovative solutions and pushing technological boundaries.</div>
+                            <div class="team-skills">
+                                <span class="skill-tag">JavaScript</span>
+                                <span class="skill-tag">Python</span>
+                                <span class="skill-tag">React</span>
+                            </div>
+                            <div class="team-socials">
+                                <a href="https://github.com/dnyftetch" target="_blank" class="social-link" title="GitHub">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://twitter.com/dnyftetch" target="_blank" class="social-link" title="Twitter">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Team Member 2 -->
+                    <div class="team-card">
+                        <div class="team-avatar">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="team-content">
+                            <div class="team-name">AI Researcher</div>
+                            <div class="team-role">Machine Learning Specialist</div>
+                            <div class="team-bio">Exploring cutting-edge AI and machine learning methodologies and applications.</div>
+                            <div class="team-skills">
+                                <span class="skill-tag">TensorFlow</span>
+                                <span class="skill-tag">PyTorch</span>
+                                <span class="skill-tag">ML</span>
+                            </div>
+                            <div class="team-socials">
+                                <a href="https://github.com/dnyftetch" target="_blank" class="social-link" title="GitHub">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Team Member 3 -->
+                    <div class="team-card">
+                        <div class="team-avatar">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <div class="team-content">
+                            <div class="team-name">Mobile Developer</div>
+                            <div class="team-role">Android Specialist</div>
+                            <div class="team-bio">Creating powerful mobile experiences and Termux integration solutions.</div>
+                            <div class="team-skills">
+                                <span class="skill-tag">Kotlin</span>
+                                <span class="skill-tag">Java</span>
+                                <span class="skill-tag">Termux</span>
+                            </div>
+                            <div class="team-socials">
+                                <a href="https://github.com/dnyftetch" target="_blank" class="social-link" title="GitHub">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Team Member 4 -->
+                    <div class="team-card">
+                        <div class="team-avatar">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="team-content">
+                            <div class="team-name">Documentation Lead</div>
+                            <div class="team-role">Technical Writer</div>
+                            <div class="team-bio">Making complex concepts accessible through clear and comprehensive documentation.</div>
+                            <div class="team-skills">
+                                <span class="skill-tag">Writing</span>
+                                <span class="skill-tag">API Docs</span>
+                                <span class="skill-tag">Guides</span>
+                            </div>
+                            <div class="team-socials">
+                                <a href="https://github.com/dnyftetch" target="_blank" class="social-link" title="GitHub">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Open Positions Section -->
+                <div class="section-divider" style="margin-top: 100px;">
+                    <h2>We're Hiring</h2>
+                    <p>Join our growing team and make an impact</p>
+                </div>
+
+                <div class="roles-grid">
+                    <div class="role-card">
+                        <div class="role-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3>Backend Engineer</h3>
+                        <p>Help build scalable APIs and server infrastructure using Node.js and Python.</p>
+                    </div>
+
+                    <div class="role-card">
+                        <div class="role-icon">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h3>Frontend Developer</h3>
+                        <p>Create beautiful, responsive user interfaces using modern web technologies.</p>
+                    </div>
+
+                    <div class="role-card">
+                        <div class="role-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h3>AI/ML Engineer</h3>
+                        <p>Develop and optimize machine learning models for production environments.</p>
+                    </div>
+
+                    <div class="role-card">
+                        <div class="role-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3>Mobile Developer</h3>
+                        <p>Build powerful mobile applications for Android and other platforms.</p>
+                    </div>
+
+                    <div class="role-card">
+                        <div class="role-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3>Learning Content Creator</h3>
+                        <p>Develop comprehensive learning materials and educational content for developers.</p>
+                    </div>
+
+                    <div class="role-card">
+                        <div class="role-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h3>Technical Writer</h3>
+                        <p>Create clear and comprehensive documentation for APIs and tools.</p>
+                    </div>
+                </div>
+
+                <!-- CTA Section -->
+                <div class="cta-section">
+                    <h2>Interested in Joining?</h2>
+                    <p>We're always looking for passionate developers and researchers who want to make a difference. Check out our open positions and contribute to the future of technology.</p>
+                    <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                        <a href="https://github.com/dnyftetch" target="_blank" class="btn btn-primary">
+                            <i class="fab fa-github"></i> View Open Source
+                        </a>
+                        <a href="mailto:contact@dnyf.com" class="btn btn-secondary">
+                            <i class="fas fa-envelope"></i> Get In Touch
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Contributors Section -->
+                <div class="section-divider">
+                    <h2>Special Thanks to Our Contributors</h2>
+                    <p>We're grateful to all the open source contributors who help make DNYF better</p>
+                </div>
+
+                <div style="text-align: center; padding: 40px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; margin: 40px 0;">
+                    <p style="color: var(--gray); margin-bottom: 20px;">
+                        DNYF is powered by the contributions of developers and researchers around the world. 
+                        Want to contribute? Check out our repositories on GitHub!
+                    </p>
+                    <a href="https://github.com/dnyftetch" target="_blank" class="btn btn-primary">
+                        <i class="fab fa-github"></i> Contribute on GitHub
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <i class="fas fa-terminal"></i> DNYF <span>Platform</span>
+                    </div>
+                    <p>Built by a passionate team of developers and researchers.</p>
+                    <div class="footer-social">
+                        <a href="https://github.com/dnyftetch" target="_blank">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://twitter.com/dnyftetch" target="_blank">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="mailto:contact@dnyf.com">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Team</h3>
+                    <a href="/pages/team">Our Team</a>
+                    <a href="https://github.com/dnyftetch">Contributors</a>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Careers</h3>
+                    <a href="/pages/team">Open Positions</a>
+                    <a href="mailto:contact@dnyf.com">Apply Now</a>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Community</h3>
+                    <a href="/community/discussions">Discussions</a>
+                    <a href="/community/contribute">Contribute</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear">2024</span> DNYF Platform. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/js/menu.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+        });
+    </script>
+</body>
+</html>
