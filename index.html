@@ -4,17 +4,17 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>DNYF Platform | AI Research, Development & Learning</title>
+	<title>DNYFTECH | AI Engineering & Research</title>
 
 	<!-- SEO & Meta Tags -->
-	<meta name="description" content="DNYF Platform - AI Research, Development Tools, Documentation, Learning Guides, and Resources">
+	<meta name="description" content="DNYFTECH - AI Research, Development Tools, Documentation, Learning Guides, and Resources">
 	<meta name="keywords" content="DNYF, AI Research, Development Platform, Learning, Tools, Documentation">
 	<meta name="author" content="DNYF">
 	<meta name="theme-color" content="#3DDC84">
 
 	<!-- PWA -->
-	<link rel="manifest" href="/manifest.json">
-	<link rel="icon" href="/icons/icon-192x192.png" type="image/png">
+	<link rel="manifest" href="manifest.json">
+	<link rel="icon" href="icons/dnyftech.svg" type="image/svg+xml">
 
 	<!-- Fonts -->
 	<link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -180,7 +180,7 @@
 		// Service Worker
 		if ('serviceWorker' in navigator) {
 		    window.addEventListener('load', () => {
-		        navigator.serviceWorker.register('/sw.js');
+		        navigator.serviceWorker.register('sw.js');
 		    });
 		}
 	</script>
@@ -195,7 +195,7 @@
 			</div>
 			<div class="spinner"></div>
 			<div class="loading-text">
-				DNYF Platform
+				DNYFTECH
 				<span class="dots">
 					<span class="dot"></span>
 					<span class="dot"></span>
@@ -377,7 +377,7 @@
 						<button id="themeToggle" class="menu-btn theme-btn" title="Toggle theme">
 							<i class="fas fa-moon"></i>
 						</button>
-						<a href="https://github.com/dnyf-platform" target="_blank" class="menu-btn github-btn">
+						<a href="https://github.com/dnyftech" target="_blank" class="menu-btn github-btn">
 							<i class="fab fa-github"></i>
 						</a>
 					</div>
@@ -395,7 +395,7 @@
 					<div class="hero-badge">
 						<i class="fas fa-terminal"></i> Advanced Development Platform
 					</div>
-					<h1>Welcome to <span class="highlight">DNYF Platform</span></h1>
+					<h1>Welcome to <span class="highlight">DNYFTECH</span></h1>
 					<p>AI Research, Development Tools, Documentation, and Learning Resources all in one place.</p>
 
 					<div class="hero-cards">
@@ -554,7 +554,7 @@
 					</div>
 					<p>Advanced development platform with AI research, tools, documentation, and learning resources.</p>
 					<div class="footer-social">
-						<a href="https://github.com/dnyf-platform" target="_blank" title="GitHub">
+						<a href="https://github.com/dnyftech" target="_blank" title="GitHub">
 							<i class="fab fa-github"></i>
 						</a>
 						<a href="https://twitter.com/dnyf-platform" target="_blank" title="Twitter">
@@ -590,7 +590,7 @@
 			</div>
 
 			<div class="footer-bottom">
-				<p>&copy; <span id="currentYear">2024</span> DNYF Platform. All rights reserved.</p>
+				<p>&copy; <span id="currentYear">2024</span> DNYFTECH. All rights reserved.</p>
 				<div class="footer-meta">
 					<span><i class="fas fa-code"></i> Open Source</span>
 					<span><i class="fas fa-mobile-alt"></i> PWA Ready</span>
@@ -636,14 +636,36 @@
 	</script>
 
 	<!-- Scripts -->
-	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-	<script src="js/app.js"></script>
-	<script src="js/pwa.js"></script>
-	<script src="js/loading-animation.js"></script>
-	<script src="js/contributions.js"></script>
-	<script src="js/platform.js"></script>
-	<script src="js/github.js"></script>
-	<script src="js/menu.js"></script>
+
+
+
+
+
+
+
+
+
+
+<script id="dnyf-pages-path-fix">
+(() => {
+  const parts = location.pathname.split('/').filter(Boolean);
+  const basePath = location.hostname.endsWith('.github.io')
+    && parts.length > 0
+    ? '/' + parts[0]
+    : '';
+
+  if (!basePath) return;
+
+  document.querySelectorAll('[href], [src]').forEach((element) => {
+    for (const attribute of ['href', 'src']) {
+      const value = element.getAttribute(attribute);
+      if (value && value.startsWith('/') && !value.startsWith('//')) {
+        element.setAttribute(attribute, basePath + value);
+      }
+    }
+  });
+})();
+</script>
 
 </body>
 

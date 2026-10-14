@@ -1,0 +1,19 @@
+{
+  "id": "./",
+  "name": "DNYFTECH",
+  "short_name": "DNYFTECH",
+  "description": "DNYFTECH engineering, AI research and development.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0a0a0f",
+  "theme_color": "#3DDC84",
+  "icons": [
+    {
+      "src": "icons/dnyftech.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
