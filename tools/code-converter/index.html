@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0a0a0f">
+<meta name="description" content="Escape and decode HTML entities in your browser.">
+<title>Code Converter | DNYFTECH</title>
+<link rel="icon" href="../../icons/dnyftech.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/routes.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+<a class="brand" href="../../index.html">DNYF<span>TECH</span></a>
+<nav aria-label="Main navigation">
+<a href="../../index.html">Home</a>
+<a href="../../tools/">Tools</a>
+<a href="../../docs/">Docs</a>
+<a href="../../learning/">Learning</a>
+<a href="../../community/">Community</a>
+</nav>
+</div></header>
+<main class="wrap">
+<p class="eyebrow">Local browser utility</p><h1>Code Converter</h1><p>Escape or unescape HTML entities. This is a text utility, not a programming-language transpiler.</p>
+<label for="source">Input text</label><textarea id="source" placeholder="Enter text or HTML"></textarea>
+<button id="escape">Escape HTML</button><button id="unescape" class="secondary">Unescape HTML</button><button id="copy" class="secondary">Copy result</button>
+<label for="output">Output</label><textarea id="output" readonly></textarea><p id="status" class="status" role="status"></p>
+<script>
+const source=document.querySelector('#source'),output=document.querySelector('#output'),status=document.querySelector('#status');
+document.querySelector('#escape').onclick=()=>{output.value=source.value.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');status.textContent='HTML entities escaped.'};
+document.querySelector('#unescape').onclick=()=>{const el=document.createElement('textarea');el.innerHTML=source.value;output.value=el.value;status.textContent='HTML entities decoded.'};
+document.querySelector('#copy').onclick=async()=>{try{await navigator.clipboard.writeText(output.value);status.textContent='Copied.'}catch(e){status.textContent='Clipboard unavailable; copy manually.'}};
+</script></main>
+<footer><div class="wrap">DNYFTECH · Engineering, AI research and development · <a href="https://github.com/dnyftech/dnyftech-website">Source repository</a></div></footer>
+</body></html>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0a0a0f">
+<meta name="description" content="Format and validate JSON locally.">
+<title>JSON Formatter | DNYFTECH</title>
+<link rel="icon" href="../../icons/dnyftech.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/routes.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+<a class="brand" href="../../index.html">DNYF<span>TECH</span></a>
+<nav aria-label="Main navigation">
+<a href="../../index.html">Home</a>
+<a href="../../tools/">Tools</a>
+<a href="../../docs/">Docs</a>
+<a href="../../learning/">Learning</a>
+<a href="../../community/">Community</a>
+</nav>
+</div></header>
+<main class="wrap">
+<p class="eyebrow">Local browser utility</p><h1>JSON Formatter</h1>
+<p>Validate and format JSON or minify it. Input is processed in this browser.</p>
+<label for="source">JSON input</label><textarea id="source" spellcheck="false" placeholder='{"project":"DNYFTECH","active":true}'></textarea>
+<button id="format">Format JSON</button><button id="minify" class="secondary">Minify</button><button id="clear" class="secondary">Clear</button>
+<p id="status" class="status" role="status"></p><label for="output">Result</label><textarea id="output" spellcheck="false" readonly></textarea>
+<button id="copy" class="secondary">Copy result</button>
+<script>
+const src=document.querySelector('#source'),out=document.querySelector('#output'),status=document.querySelector('#status');
+function run(compact){try{const value=JSON.parse(src.value);out.value=JSON.stringify(value,null,compact?0:2);status.textContent='Valid JSON.'}catch(e){status.textContent='Invalid JSON: '+e.message;out.value=''}}
+document.querySelector('#format').onclick=()=>run(false);
+document.querySelector('#minify').onclick=()=>run(true);
+document.querySelector('#clear').onclick=()=>{src.value='';out.value='';status.textContent=''};
+document.querySelector('#copy').onclick=async()=>{try{await navigator.clipboard.writeText(out.value);status.textContent='Copied.'}catch(e){status.textContent='Clipboard access unavailable; copy the result manually.'}};
+</script></main>
+<footer><div class="wrap">DNYFTECH · Engineering, AI research and development · <a href="https://github.com/dnyftech/dnyftech-website">Source repository</a></div></footer>
+</body></html>

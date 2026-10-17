@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0a0a0f">
+<meta name="description" content="Test browser-accessible HTTP endpoints.">
+<title>API Tester | DNYFTECH</title>
+<link rel="icon" href="../../icons/dnyftech.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/routes.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+<a class="brand" href="../../index.html">DNYF<span>TECH</span></a>
+<nav aria-label="Main navigation">
+<a href="../../index.html">Home</a>
+<a href="../../tools/">Tools</a>
+<a href="../../docs/">Docs</a>
+<a href="../../learning/">Learning</a>
+<a href="../../community/">Community</a>
+</nav>
+</div></header>
+<main class="wrap">
+<p class="eyebrow">Browser HTTP client</p><h1>API Tester</h1><p>Send HTTP requests to APIs that permit browser access through CORS. Never enter private credentials on a shared device.</p>
+<label for="method">Method</label><select id="method"><option>GET</option><option>POST</option><option>PUT</option><option>PATCH</option><option>DELETE</option></select>
+<label for="url">Request URL</label><input id="url" type="url" placeholder="https://api.example.com/endpoint">
+<label for="headers">Headers (JSON object)</label><textarea id="headers" placeholder='{"Accept":"application/json"}'></textarea>
+<label for="body">Request body (for POST/PUT/PATCH)</label><textarea id="body" placeholder='{"example":true}'></textarea>
+<button id="send">Send request</button><p id="status" class="status" role="status"></p><label for="response">Response</label><textarea id="response" readonly></textarea>
+<script>
+document.querySelector('#send').onclick=async()=>{const status=document.querySelector('#status'),response=document.querySelector('#response');status.textContent='Sending…';response.value='';
+try{const method=document.querySelector('#method').value,url=document.querySelector('#url').value.trim();if(!url)throw Error('Enter a request URL.');
+const headersText=document.querySelector('#headers').value.trim();const headers=headersText?JSON.parse(headersText):{};
+const options={method,headers};if(['POST','PUT','PATCH'].includes(method)){const body=document.querySelector('#body').value.trim();if(body)options.body=body}
+const res=await fetch(url,options);const text=await res.text();status.textContent=`HTTP ${res.status} ${res.statusText}`;response.value=text}catch(e){status.textContent='Request failed: '+e.message+' (CORS or network restrictions may apply).'}};
+</script></main>
+<footer><div class="wrap">DNYFTECH · Engineering, AI research and development · <a href="https://github.com/dnyftech/dnyftech-website">Source repository</a></div></footer>
+</body></html>

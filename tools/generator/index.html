@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0a0a0f">
+<meta name="description" content="Generate random identifiers in your browser.">
+<title>Identifier Generator | DNYFTECH</title>
+<link rel="icon" href="../../icons/dnyftech.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/routes.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+<a class="brand" href="../../index.html">DNYF<span>TECH</span></a>
+<nav aria-label="Main navigation">
+<a href="../../index.html">Home</a>
+<a href="../../tools/">Tools</a>
+<a href="../../docs/">Docs</a>
+<a href="../../learning/">Learning</a>
+<a href="../../community/">Community</a>
+</nav>
+</div></header>
+<main class="wrap">
+<p class="eyebrow">Local browser utility</p><h1>Identifier Generator</h1><p>Generate random identifiers using the browser's cryptographic random number generator.</p>
+<label for="length">Length (8–128)</label><input id="length" type="number" min="8" max="128" value="24">
+<label for="count">Number of values (1–20)</label><input id="count" type="number" min="1" max="20" value="1">
+<button id="generate">Generate</button><button id="copy" class="secondary">Copy output</button><label for="output">Output</label><textarea id="output" readonly></textarea><p id="status" class="status" role="status"></p>
+<script>
+document.querySelector('#generate').onclick=()=>{const n=Number(document.querySelector('#length').value),count=Number(document.querySelector('#count').value),out=document.querySelector('#output'),status=document.querySelector('#status');
+if(!Number.isInteger(n)||n<8||n>128||!Number.isInteger(count)||count<1||count>20){status.textContent='Choose a length from 8–128 and count from 1–20.';return}
+const alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
+out.value=Array.from({length:count},()=>{const bytes=new Uint8Array(n);crypto.getRandomValues(bytes);return Array.from(bytes,b=>alphabet[b%alphabet.length]).join('')}).join('\n');status.textContent='Generated locally.'};
+document.querySelector('#copy').onclick=async()=>{try{await navigator.clipboard.writeText(document.querySelector('#output').value);document.querySelector('#status').textContent='Copied.'}catch(e){document.querySelector('#status').textContent='Clipboard unavailable; copy manually.'}};
+</script></main>
+<footer><div class="wrap">DNYFTECH · Engineering, AI research and development · <a href="https://github.com/dnyftech/dnyftech-website">Source repository</a></div></footer>
+</body></html>
